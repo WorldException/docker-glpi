@@ -1,0 +1,22 @@
+version: '2'
+services:
+  glpi:
+    image: glpi:9.2
+    ports:
+      - "8090:80"
+    links:
+      - mysql:db
+    env_file:
+      - ./glpi.env
+    volumes:
+      - glpidata:/var/www/html/glpi
+  mysql:
+    image: mariadb
+    env_file:
+      - ./glpi.env
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+volumes:
+  glpidata:
+  mysqldata:
